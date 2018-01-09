@@ -16,5 +16,24 @@ namespace MVCBOMM.Controllers
             List<Employee> Elist = getempdata.employees.ToList();
             return View(Elist);
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+           
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Employee employee)
+        {
+            TryUpdateModel(employee);
+
+            GetFromDb SendEmployeeFormData = new GetFromDb();
+            SendEmployeeFormData.RecieveDataAndAddToDB(employee);
+
+
+            return RedirectToAction("EmployeeList");
+        }
     }
 }

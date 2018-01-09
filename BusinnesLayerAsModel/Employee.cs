@@ -1,4 +1,6 @@
-﻿namespace BusinnesLayerAsModel
+﻿using System;
+
+namespace BusinnesLayerAsModel
 {
     public class Employee
     {
@@ -7,6 +9,6 @@
 
         public string Gender { get; set; }
         public string City { get; set; }
-        public int DepartmentId { get; set; }
+        public DateTime DateOfBirth { get; set; }
     }
 }
