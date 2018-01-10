@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BusinnesLayerAsModel;
 using System.Data;
+using System.Web.ModelBinding;
 
 namespace MVCBOMM.Controllers
 {
@@ -53,6 +54,8 @@ namespace MVCBOMM.Controllers
         }
 
 
+
+        // Click on the Edit Link in Employee List screen and open the edit screen for update
         [HttpGet]
         public ActionResult EditEmployee(int id)
         {
@@ -60,6 +63,24 @@ namespace MVCBOMM.Controllers
             Employee e = EditData.employees.Single(emp => emp.EmployeeID == id);
             return View(e);
         }
+
+        // Recieve the data on form page via employee object and pass it onto the RecvAndUpdateToDB method for manipulation via a stored procedure
+        [HttpPost]
+        public ActionResult EditEmployee(Employee employee)
+        {
+            TryValidateModel(employee);
+
+            if (ModelState.IsValid)
+            {
+                GetFromDb.RecvAndUpdateToDB(employee);
+            }
+            else
+            {
+                return RedirectToAction("EditEmployee");
+            }
+            return RedirectToAction("EmployeeList");
+        }
+
 
     }
 }

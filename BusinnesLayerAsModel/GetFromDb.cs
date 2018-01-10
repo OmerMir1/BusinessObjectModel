@@ -38,37 +38,77 @@ namespace BusinnesLayerAsModel
             
         }
 
-        public void RecieveDataAndAddToDB (Employee emp)
-        {                      
-             string CS = ConfigurationManager.ConnectionStrings["BusinessObjectModel"].ConnectionString;
-    using (SqlConnection con = new SqlConnection(CS))
-    {
-        SqlCommand cmd = new SqlCommand("spAddEmployee", con);
-    cmd.CommandType = CommandType.StoredProcedure;
 
-        SqlParameter paramName = new SqlParameter();
-        paramName.ParameterName = "@EmployeeName";
-        paramName.Value = emp.EmployeeName;
-        cmd.Parameters.Add(paramName);
 
-        SqlParameter paramGender = new SqlParameter();
-        paramGender.ParameterName = "@Gender";
-        paramGender.Value = emp.Gender;
-        cmd.Parameters.Add(paramGender);
+        public void RecieveDataAndAddToDB(Employee emp)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["BusinessObjectModel"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("spAddEmployee", con);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-        SqlParameter paramCity = new SqlParameter();
-        paramCity.ParameterName = "@City";
-        paramCity.Value = emp.City;
-        cmd.Parameters.Add(paramCity);
+                SqlParameter paramName = new SqlParameter();
+                paramName.ParameterName = "@EmployeeName";
+                paramName.Value = emp.EmployeeName;
+                cmd.Parameters.Add(paramName);
 
-        SqlParameter paramDateOfBirth = new SqlParameter();
-        paramDateOfBirth.ParameterName = "@DateOfBirth";
-        paramDateOfBirth.Value = emp.DateOfBirth;
-        cmd.Parameters.Add(paramDateOfBirth);
+                SqlParameter paramGender = new SqlParameter();
+                paramGender.ParameterName = "@Gender";
+                paramGender.Value = emp.Gender;
+                cmd.Parameters.Add(paramGender);
 
-        con.Open();
-        cmd.ExecuteNonQuery();
-    }
+                SqlParameter paramCity = new SqlParameter();
+                paramCity.ParameterName = "@City";
+                paramCity.Value = emp.City;
+                cmd.Parameters.Add(paramCity);
+
+                SqlParameter paramDateOfBirth = new SqlParameter();
+                paramDateOfBirth.ParameterName = "@DateOfBirth";
+                paramDateOfBirth.Value = emp.DateOfBirth;
+                cmd.Parameters.Add(paramDateOfBirth);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+      public static void RecvAndUpdateToDB(Employee emp)
+        {
+            string CS = ConfigurationManager.ConnectionStrings["BusinessObjectModel"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("spSaveEmployee", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramID = new SqlParameter();
+                paramID.ParameterName = "@EmployeeID";
+                paramID.Value = emp.EmployeeID;
+                cmd.Parameters.Add(paramID);
+
+                SqlParameter paramName = new SqlParameter();
+                paramName.ParameterName = "@EmployeeName";
+                paramName.Value = emp.EmployeeName;
+                cmd.Parameters.Add(paramName);
+
+                SqlParameter paramGender = new SqlParameter();
+                paramGender.ParameterName = "@Gender";
+                paramGender.Value = emp.Gender;
+                cmd.Parameters.Add(paramGender);
+
+                SqlParameter paramCity = new SqlParameter();
+                paramCity.ParameterName = "@City";
+                paramCity.Value = emp.City;
+                cmd.Parameters.Add(paramCity);
+
+                SqlParameter paramDateOfBirth = new SqlParameter();
+                paramDateOfBirth.ParameterName = "@DateOfBirth";
+                paramDateOfBirth.Value = emp.DateOfBirth;
+                cmd.Parameters.Add(paramDateOfBirth);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }

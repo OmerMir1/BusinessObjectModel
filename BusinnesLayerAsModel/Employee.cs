@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace BusinnesLayerAsModel
 {
@@ -9,6 +10,7 @@ namespace BusinnesLayerAsModel
 
         public string Gender { get; set; }
         public string City { get; set; }
+        [DisplayFormat(DataFormatString = "{DD/MM/YYYY}") ]
         public DateTime DateOfBirth { get; set; }
     }
 }
