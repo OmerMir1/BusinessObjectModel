@@ -34,7 +34,8 @@ namespace MVCBOMM.Controllers
         //Click on the create new link and display create new screen
 
         [HttpGet]
-        public ActionResult Create()
+        [ActionName("Create")]    //Because of this attribute create_get will still be called when url says create in action method.,,,
+        public ActionResult Create_Get()
         {
            
             return View();
@@ -43,8 +44,11 @@ namespace MVCBOMM.Controllers
 
         // Submit the new data entered in the form and save it to DB
         [HttpPost]
-        public ActionResult Create(Employee employee)
+        [ActionName("Create")]  //Because of this attribute create_Post will still be called when url says create in action method.,,,
+        public ActionResult Create_Post()
         {
+            Employee employee = new Employee();
+
             TryUpdateModel(employee);
 
             GetFromDb SendEmployeeFormData = new GetFromDb();
@@ -66,13 +70,14 @@ namespace MVCBOMM.Controllers
 
         // Recieve the data on form page via employee object and pass it onto the RecvAndUpdateToDB method for manipulation via a stored procedure
         [HttpPost]
-        public ActionResult EditEmployee(Employee employee)
+        public ActionResult EditEmployee()
         {
-            TryValidateModel(employee);
+            Employee Emp = new Employee();
+            TryValidateModel(Emp);
 
             if (ModelState.IsValid)
             {
-                GetFromDb.RecvAndUpdateToDB(employee);
+                GetFromDb.RecvAndUpdateToDB(Emp);
             }
             else
             {

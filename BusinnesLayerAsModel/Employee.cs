@@ -5,12 +5,17 @@ namespace BusinnesLayerAsModel
 {
     public class Employee
     {
+        [Required]
         public int EmployeeID { get; set; }
+        [Required]
         public string EmployeeName { get; set; }
-
+        [Required]
         public string Gender { get; set; }
+        [Required]
         public string City { get; set; }
-        [DisplayFormat(DataFormatString = "{DD/MM/YYYY}") ]
-        public DateTime DateOfBirth { get; set; }
+        [Required]
+        public DateTime? DateOfBirth { get; set; }
+
+        
     }
 }

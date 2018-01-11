@@ -28,7 +28,10 @@ namespace BusinnesLayerAsModel
                     emp.EmployeeName = rdr["EmployeeName"].ToString();
                     emp.Gender = rdr["Gender"].ToString();
                     emp.City = rdr["City"].ToString();
-
+                    if (!(rdr["DateOfBirth"] is DBNull))
+                    {
+                        emp.DateOfBirth = Convert.ToDateTime(rdr["DateOfBirth"]);
+                    }
 
                     employee.Add(emp);
                 }
